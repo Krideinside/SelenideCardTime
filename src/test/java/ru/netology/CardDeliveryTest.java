@@ -45,8 +45,8 @@ public class CardDeliveryTest {
         $(byText("Москва")).click();
         $("[data-test-id=date]").click();
         $(".popup__content").shouldBe(visible);
-        $(".calendar__arrow calendar__arrow_direction_right").click();
-        $(".calendar__day").shouldHave(text("8")).click();
+        $(".calendar__arrow.calendar__arrow_direction_right").click();
+        $$(".calendar__day").findBy(text("[data-day='1694120400000']")).click();
         $("[data-test-id=name] input").setValue("Александр Труфманов");
         $("[data-test-id=phone] input").setValue("+79262627815");
         $("[data-test-id='agreement']").click();
