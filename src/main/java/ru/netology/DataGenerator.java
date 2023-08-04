@@ -13,6 +13,10 @@ public class DataGenerator {
         return LocalDate.now().plusDays(shift).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 
+    public static String generateDay(int shift) {
+        return LocalDate.now().plusDays(shift).format(DateTimeFormatter.ofPattern("dd"));
+    }
+
     public static String generateCity() {
         var cities = new String[]{"Майкоп", "Нальчик", "Москва", "Санкт-Петербург", "Казань",
                 "Воронеж", "Екатеринбург", "Магадан", "Владимир", "Брянск", "Калуга", "Саратов", "Самара"};
