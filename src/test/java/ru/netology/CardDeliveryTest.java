@@ -1,9 +1,15 @@
 package ru.netology;
 
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.conditions.ExactText;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
+
 import java.time.Duration;
+import java.util.Locale;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -11,7 +17,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class CardDeliveryTest {
 
     @BeforeEach
-    void setup() {
+    public void setup() {
         open("http://localhost:9999");
     }
 
@@ -34,14 +40,19 @@ public class CardDeliveryTest {
 
     @Test
     void shouldTestSuccessFormWithCalendar() {
-        var daysToAddForMeeting = 7;
+        var daysToAddForMeeting = 31;
         var meetingDate = DataGenerator.generateDate(daysToAddForMeeting);
-        var meetingDay= DataGenerator.generateDay(daysToAddForMeeting);
+        var meetingDay = DataGenerator.generateDay(daysToAddForMeeting);
         $("[data-test-id=city] input").setValue("Мо");
         $$(".menu-item__control").findBy(text("Москва")).click();
-        $("[data-test-id=date]").click();
-        $(".popup__content").shouldBe(visible);
-        $$("td.calendar__day").findBy(text(meetingDay)).click();
+        $("[class=icon-button__content]").click();
+//        $("[class=calendar-input__calendar-wrapper]").shouldBe(visible);
+//        if ($$("[data-day]").findBy(value(meetingDay)).equals(false)) {
+            $("[class='calendar__arrow calendar__arrow_direction_right']").click();
+            $$("[data-day]").findBy(exactText(meetingDay)).click();
+//        } {
+//            $$("[data-day]").findBy(exactText(meetingDay)).click();
+//        }
         $("[data-test-id=name] input").setValue("Александр Труфманов");
         $("[data-test-id=phone] input").setValue("+79262627815");
         $("[data-test-id='agreement']").click();
